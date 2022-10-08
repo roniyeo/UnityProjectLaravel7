@@ -1,0 +1,33 @@
+/* GALLERY */
+.gallery-box{
+    overflow: hidden;
+}
+.gallery-image{
+    width: 50%;
+    float: left;
+    padding: 10px;
+    box-shadow: 1px 1px 0px #ddd;
+}
+.gallery-image-edit{
+    width: 33.3333333%;
+    float: left;
+    padding: 10px;
+    box-shadow: 1px 1px 0px #ddd;
+    position: relative;
+}
+.gallery-image-edit button{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 0 2px;
+}
+
+#gallaryimageupload{
+    display: none;
+}
+.gallery-image-single{
+    width: 33.3333333%;
+    float: left;
+    padding: 8px;
+    box-sizing: border-box;
+}
