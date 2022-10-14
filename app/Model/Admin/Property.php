@@ -46,4 +46,9 @@ class Property extends Model
     {
         return $this->hasMany(PropertyImageGalleries::class);
     }
+
+    // public function tipeprice()
+    // {
+    //     return $this->belongsTo(Tipeprice::class);
+    // }
 }

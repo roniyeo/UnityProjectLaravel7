@@ -25,14 +25,13 @@
             </div>
         </div>
 
-        <form action="#" method="post" enctype="multipart/form-data">
+        <form action="{{ route('property.update') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input type="hidden" name="kode" value="{{ $property->kode }}">
             <section class="section">
                 <div class="card">
                     <div class="card-header">
-                        <div class="card-header">
-                            Edit Properties : {{ $property->kode }}
-                        </div>
+                        Edit Properties : {{ $property->kode }}
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -113,9 +112,7 @@
                                 <h6>Kota</h6>
                                 <fieldset class="form-group">
                                     <select class="form-select" id="kota" name="kota">
-                                        @foreach ($cities as $id => $name)
-                                            <option value="{{ $id }}" {{ $property->city == $id ? 'selected' : '' }}>{{ $name }}</option>
-                                        @endforeach
+                                        <option value="{{ $cities->id }}" {{ $property->city == $cities->id ? 'selected' : '' }}>{{ $cities->name }}</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -123,9 +120,7 @@
                                 <h6>Daerah</h6>
                                 <fieldset class="form-group">
                                     <select class="form-select" id="daerah" name="daerah">
-                                        @foreach ($district as $id => $name)
-                                            <option value="{{ $id }}" {{ $property->daerah == $id ? 'selected' : '' }}>{{ $name }}</option>
-                                        @endforeach
+                                        <option value="{{ $district->id }}" {{ $property->daerah == $district->id ? 'selected' : '' }}>{{ $district->name }}</option>
                                     </select>
                                 </fieldset>
                             </div>
@@ -219,19 +214,80 @@
                         </div>
                     </div>
                 </div>
+                <button type="submit" class="btn btn-sm btn-warning">Update</button>
+                <a href="{{ route('property') }}" class="btn btn-sm btn-info">Back</a>
             </section>
         </form>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+
+        $(document).ready(function () {
+            $('#provinsi').change(function () {
+                var provinsiID = $(this).val();
+                if (provinsiID) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/getKota?id='+provinsiID,
+                        dataType: 'JSON',
+                        success: function (response) {
+                            if (response) {
+                                $("#kota").empty();
+                                $("#daerah").empty();
+                                $("#kota").append('<option>Pilih Kota</option>');
+                                $("#daerah").append('<option>Pilih Daerah</option>');
+                                $.each(response,function(nama,kode){
+                                    $("#kota").append('<option value="'+kode+'">'+nama+'</option>');
+                                });
+                            }else{
+                                $("#kota").empty();
+                                $("#daerah").empty();
+                            }
+                        }
+                    })
+                }else{
+                    $("#kota").empty();
+                    $("#daerah").empty();
+                }
+            });
+
+            $('#kota').change(function () {
+                var kotaID = $(this).val();
+                if (kotaID) {
+                    $.ajax({
+                        type:"GET",
+                        url: "/getDaerah?city_id="+kotaID,
+                        dataType: 'JSON',
+                        success:function(response){
+                            if(response){
+                                $("#daerah").empty();
+                                $("#daerah").append('<option value="">Pilih Daerah</option>');
+                                $.each(response,function(nama,kode){
+                                    $("#daerah").append('<option value="'+kode+'">'+nama+'</option>');
+                                });
+                            }else{
+                                $("#daerah").empty();
+                            }
+                        }
+                    })
+                }else{
+                    $("#daerah").empty();
+                }
+            });
+        });
+
+        $(document).on('click','#galleryuploadbutton',function(e){
+            e.preventDefault();
+            $('#gallaryimageupload').click();
         });
 
         $('.gallery-image-edit button').on('click',function(e){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             e.preventDefault();
             var id = $(this).data('id');
             var image = $('#gallery-'+id+' img').attr('alt');
@@ -242,23 +298,21 @@
             });
         });
 
-        $(document).ready(function () {
-            var imagesPreview = function(input, placeToInsertImagePreview) {
-                if (input.files) {
-                    var filesAmount = input.files.length;
-                    for (i = 0; i < filesAmount; i++) {
-                        var reader = new FileReader();
-                        reader.onload = function(event) {
-                            $('<div class="gallery-image-edit" id="gallery-perview-'+i+'"><img src="'+event.target.result+'" height="106" width="173"/></div>').appendTo(placeToInsertImagePreview);
-                        }
-                        reader.readAsDataURL(input.files[i]);
+        var imagesPreview = function(input, placeToInsertImagePreview) {
+            if (input.files) {
+                var filesAmount = input.files.length;
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        $('<div class="gallery-image-edit" id="gallery-perview-'+i+'"><img src="'+event.target.result+'" height="106" width="173"/></div>').appendTo(placeToInsertImagePreview);
                     }
+                    reader.readAsDataURL(input.files[i]);
                 }
-            };
-            $('#gallaryimageupload').on('change', function() {
-                imagesPreview(this, 'div#gallerybox');
-            });
-        })
+            }
+        };
+        $('#gallaryimageupload').on('change', function() {
+            imagesPreview(this, 'div#gallerybox');
+        });
 
         $(function() {
             tinymce.init({
@@ -295,10 +349,5 @@
                 content_css: '//www.tiny.cloud/css/codepen.min.css'
             });
         });
-
-        $(document).on('click','#galleryuploadbutton',function(e){
-            e.preventDefault();
-            $('#gallaryimageupload').click();
-        })
     </script>
 @endsection

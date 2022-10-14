@@ -422,6 +422,7 @@
                 </div>
             </section>
             <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
+            <a href="{{ route('property') }}" class="btn btn-sm btn-info">Back</a>
         </form>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>

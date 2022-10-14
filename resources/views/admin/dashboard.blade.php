@@ -12,7 +12,6 @@
 @endif
 <div class="page-heading">
     <h3>{{ Auth::user()->name }} - ({{ Auth::user()->kode_unity }}) </h3>
-
 </div>
 <div class="page-content">
     <section class="row">

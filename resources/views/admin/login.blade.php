@@ -21,9 +21,10 @@
                         <a href="#"><img src="{{ asset('backend/images/bg/logo_unity.png') }}" alt="Logo"></a>
                     </div>
                     <h1 class="auth-title">Portal Admin</h1>
-                    @if(session()->has('error'))
-                        <div class="alert alert-danger">
-                            {{ session()->get('error') }}
+                    @if (session('message'))
+                        <div class="alert alert-danger alert-dismissible show fade">
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
                     <form action="{{ route('login') }}" method="POST">
@@ -67,6 +68,9 @@
         </div>
 
     </div>
+
+    <script src="{{ asset('backend/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('backend/js/app.js') }}"></script>
 </body>
 
 </html>

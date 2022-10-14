@@ -62,9 +62,9 @@
                                     </td>
                                     <td>{{ $property->type }}</td>
                                     <td>
-                                        <a class="btn btn-sm btn-info" href="#">Show</a>
+                                        <a class="btn btn-sm btn-info" href="{{ route('property.show', $property->kode) }}">Show</a>
                                         <a class="btn btn-sm btn-warning" href="{{ route('property.edit', $property->kode) }}">Edit</a>
-                                        <a class="btn btn-sm btn-danger" href="#">Delete</a>
+                                        <a class="btn btn-sm btn-danger" href="{{ route('property.destroy', $property->kode) }}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

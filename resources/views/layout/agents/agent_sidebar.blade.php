@@ -7,7 +7,7 @@
     </a>
     <hr class="sidebar-divider my-0">
     <li class="nav-item active">
-        <a class="nav-link" href="{{ route('agents.portal') }}">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -16,15 +16,13 @@
         Menus
     </div>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="{{ route('agent.property') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Create Properties</span>
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-            aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="{{ route('agent.newproperty') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>List New Properties</span>
         </a>
@@ -38,8 +36,8 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Setting</h6>
-                <a class="collapse-item" href="#">Profile</a>
-                <a class="collapse-item" href="#">Change Password</a>
+                <a class="collapse-item" href="{{ route('agent.profile') }}">Profile</a>
+                <a class="collapse-item" href="{{ route('agent.change-password') }}">Change Password</a>
             </div>
         </div>
     </li>

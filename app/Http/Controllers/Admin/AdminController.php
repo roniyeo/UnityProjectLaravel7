@@ -12,6 +12,7 @@ class AdminController extends Controller
 {
     public function index()
     {
+
         return view('admin.dashboard');
     }
 
@@ -76,22 +77,22 @@ class AdminController extends Controller
     {
         $old_image = DB::table('agents')->where('kode_unity', $request->kode_unity)->first();
 
+        $slug_name = Str::slug($request->nama_agent);
         $image_name = $request->hidden_image;
         $image = $request->file('foto_agent');
 
         if ($old_image->foto_agent == 'photo_defaults.jpg') {
             if($image != '')
             {
-                $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('agent'), $image_name);
+                $image_name = $slug_name . '-' . rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('agents'), $image_name);
             }
         }else{
             if($image != '')
             {
-                $image_name = rand() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('agent'), $image_name);
-                unlink('agent/'.$old_image->foto_agent);
-
+                $image_name = $slug_name . '-' . rand() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('agents'), $image_name);
+                unlink('agents/'.$old_image->foto_agent);
             }
         }
 
@@ -204,5 +205,5 @@ class AdminController extends Controller
         return redirect()->route('tipeprice')->with('success', 'Type deleted success');
     }
 
-    
+
 }
