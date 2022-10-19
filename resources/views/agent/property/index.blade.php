@@ -109,7 +109,7 @@
                                             <td>
                                                 <a class="btn btn-sm btn-info" href="{{ route('agent.property.show', $property->kode) }}">Show</a>
                                                 <a class="btn btn-sm btn-warning" href="{{ route('agent.property.edit', $property->kode) }}">Edit</a>
-                                                <a class="btn btn-sm btn-danger" href="{{ route('agent.property.delete', $property->kode) }}">Delete</a>
+                                                <a class="btn btn-sm btn-danger" href="{{ route('agent.property.destroy', $property->kode) }}">Delete</a>
                                             </td>
                                         </tr>
                                     @else

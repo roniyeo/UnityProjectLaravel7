@@ -102,6 +102,7 @@ class PropertyController extends Controller
                 $image->storeAs('property', $imageName, 'cover');
                 $property->cover_image = $imageName;
             }
+            $property->status = 0;
             $property->agent = $request->session()->get('kode_unity');
             $property->save();
 
@@ -153,6 +154,7 @@ class PropertyController extends Controller
                 $image->storeAs('property', $imageName, 'cover');
                 $property->cover_image = $imageName;
             }
+            $property->status = 0;
             $property->agent = $request->session()->get('kode_unity');
             $property->save();
 

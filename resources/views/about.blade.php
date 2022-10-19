@@ -26,8 +26,9 @@
                     <div class="about-text">
                         <div class="at-title">
                             <h3>Welcome to Unity Property</h3>
-                            <p>Real Estate Agency Company PT Unity Propertindo Sejahtera 📌 Batam Terima jasa titip jual,
-                                sewa properti Batam Terima konsultasi legalitas Properti</p>
+                            <p>Unity Property adalah Perusahaan yang bergerak di jasa pemasaran properti yang bernaung dibawah legalitas PT. Unity Propertindo Sejahtera.</p>
+                            <p>Unity Property hadir di Batam dengan visi untuk menjadi agensi properti milenial yang mampu memasarkan properti dengan konsep digital marketing.</p>
+                            <p>Unity Property hadir untuk menjawab kebutuhan para investor, para pencari hunian, para pemilik properti, developer properti dengan menyediakan para tenaga pemasar yang di latih secara mumpuni melalui program pelatihan. Supaya developer dan pencari properti terkhususnya di Kota Batam dapat mencari properti dengan pelayanan yang profesional dan maksimal.</p>
                         </div>
                         <div class="at-feature">
                             <div class="af-item">

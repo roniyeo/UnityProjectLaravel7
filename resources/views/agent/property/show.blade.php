@@ -176,6 +176,15 @@
                                     <td>:</td>
                                     <td>{{ $property->maps }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>:</td>
+                                    @if ($property->status == 1)
+                                    <td class="text-success">Approved</td>
+                                    @else
+                                    <td class="text-danger">Pending</td>
+                                    @endif
+                                </tr>
                             </table>
                         </div>
                         <div class="row my-3">

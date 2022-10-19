@@ -27,6 +27,20 @@
             <span>List New Properties</span>
         </a>
     </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Penjualan
+    </div>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('agent.customer') }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Customer</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
+    <div class="sidebar-heading">
+        Setting
+    </div>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
             aria-expanded="true" aria-controls="collapseUtilities">

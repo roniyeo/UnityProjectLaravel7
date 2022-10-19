@@ -4,7 +4,7 @@
     <section class="hero-section">
         <div class="container">
             <div class="hs-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero/hero-1.jpg') }}">
+                <div class="hs-item set-bg" data-setbg="https://via.placeholder.com/300x200">
                 </div>
                 <div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero/hero-2.jpg') }}">
                 </div>
@@ -17,7 +17,7 @@
 
     <!-- Search Section Begin -->
     <section class="search-section spad">
-        <form action="" method="post">
+        <form action="{{ route('search') }}" method="GET">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7">
@@ -28,13 +28,13 @@
                             <div class="cb-item">
                                 <label for="cb-sale" class="active">
                                     For Sale
-                                    <input type="radio" id="cb-sale" name="sale">
+                                    <input type="radio" id="cb-sale" name="kategori" value="sale">
                                 </label>
                             </div>
                             <div class="cb-item">
                                 <label for="cb-rent">
                                     For Rent
-                                    <input type="radio" id="cb-rent" name="rent">
+                                    <input type="radio" id="cb-rent" name="kategori" value="rent">
                                 </label>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                 <div class="pt-price">IDR.
                                     {{ number_format($property->price) }}<span>/{{ $property->tipe_price ? $property->tipe_harga : '' }}</span>
                                 </div>
-                                <h5><a href="#">{{ $property->title }}</a></h5>
+                                <h5><a href="{{ route('properties.show', $property->kode) }}">{{ $property->title }}</a></h5>
                                 <p><span class="icon_pin_alt"></span> {{ $property->address }}</p>
                                 <ul>
                                     <li><i class="fa fa-object-group"></i> {{ $property->floor }}</li>
@@ -220,7 +220,7 @@
                                 <h5>{{ $agent->nama_agent }}</h5>
                                 <span>{{ $agent->nohp }}</span>
                                 <a href="https://wa.me/62{{ $agent->nohp }}" class="btn btn-success btn-sm">Whatsapp</a>
-                                <a href="#" class="btn btn-secondary btn-sm">Show</a>
+                                <a href="{{ route('agency.show', $agent->kode_unity) }}" class="btn btn-secondary btn-sm">Show</a>
                             </div>
                         </div>
                     </div>

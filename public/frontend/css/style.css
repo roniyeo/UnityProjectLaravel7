@@ -500,7 +500,7 @@ ol {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 500px;
+    height: 780px;
 }
 
 .hs-item .hc-inner-text {
@@ -1853,7 +1853,7 @@ ol {
 }
 
 .property-pic-slider .ps-item .ps-item-inner.large-item {
-    height: 645px;
+    height: 545px;
 }
 
 .pd-text .pd-title {
@@ -1948,7 +1948,7 @@ ol {
 }
 
 .pd-text .pd-board .tab-board .nav-tabs {
-    background: #113220;
+    background: #000000;
     border-bottom: none;
 }
 

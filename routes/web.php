@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ApprovedController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +16,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/property', 'HomeController@property')->name('properties');
+Route::get('/property/{kode}', 'HomeController@showProperty')->name('properties.show');
 Route::get('/agency', 'HomeController@agents')->name('agency');
+Route::get('/agency/{kode}', 'HomeController@showAgents')->name('agency.show');
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/blog', 'HomeController@blog')->name('blog');
-
+Route::get('/search', 'HomeController@searchByFilterProperty')->name('search');
 
 // Admin
 Route::get('/admin/login', 'Admin\LoginController@index');
@@ -57,9 +60,17 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/admin/property/edit/{kode}', 'Admin\PropertyController@edit')->name('property.edit');
     Route::post('/admin/property/update', 'Admin\PropertyController@update')->name('property.update');
     Route::post('/admin/property/destroy', 'Admin\PropertyController@destroy')->name('property.destroy');
+    Route::get('/admin/property/approved', 'Admin\ApprovedController@index')->name('property.approved');
+    Route::get('/admin/property/approved/update/{kode}', 'Admin\ApprovedController@update')->name('property.approved.update');
     Route::get('/getKota', 'Admin\PropertyController@getKota');
     Route::get('/getDaerah', 'Admin\PropertyController@getDaerah');
     Route::post('/property/gallery/delete','Admin\PropertyController@galleryImageDelete')->name('property.gallery-delete');
+
+    // Admin - Front End - Slider
+    Route::get('/admin/slider', 'Admin\SliderController@index')->name('slider');
+    Route::get('/admin/slider/create', 'Admin\SliderController@create')->name('slider.create');
+    Route::post('/admin/slider/store', 'Admin\SliderController@store')->name('slider.store');
+
     // Logout
     Route::get('/admin/logout', 'Admin\LoginController@logout')->name('logout');
 });
@@ -82,8 +93,12 @@ Route::group(['middleware' => 'checkagent'], function ()
     Route::get('/getKota', 'Agent\PropertyController@getKota');
     Route::get('/getDaerah', 'Agent\PropertyController@getDaerah');
     Route::post('/agent/property/gallery/delete','Agent\PropertyController@galleryImageDelete')->name('agent.property.gallery-delete');
+
     // Agent - Listing New
     Route::get('/agent/newproperty', 'Agent\AgentController@listNewProperty')->name('agent.newproperty');
+
+    // Agent - Customer
+    Route::get('/agent/customer', 'Agent\CustomerController@index')->name('agent.customer');
 
     // Agent - Profile
     Route::get('/agent/profile', 'Agent\AgentController@profile')->name('agent.profile');

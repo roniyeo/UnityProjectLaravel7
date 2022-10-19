@@ -37,10 +37,18 @@
             </a>
         </li>
 
+        <li class="sidebar-item {{ Request::is('admin/property/approved') ? 'active' : '' }}">
+            <a href="{{ route('property.approved') }}" class='sidebar-link'>
+                <i class="bi bi-house-fill"></i>
+                <span>Approved</span>
+            </a>
+        </li>
+
+        <li class="sidebar-title">Front End</li>
         <li class="sidebar-item">
-            <a href="{{ route('logout') }}" class='sidebar-link'>
+            <a href="{{ route('slider') }}" class='sidebar-link'>
                 <i class="bi bi-grid-fill"></i>
-                <span>Logout</span>
+                <span>Slider</span>
             </a>
         </li>
 

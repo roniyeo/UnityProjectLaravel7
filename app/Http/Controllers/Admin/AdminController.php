@@ -205,5 +205,5 @@ class AdminController extends Controller
         return redirect()->route('tipeprice')->with('success', 'Type deleted success');
     }
 
-
+    
 }

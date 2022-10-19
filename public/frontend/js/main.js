@@ -67,10 +67,10 @@
         margin: 20,
         nav: true,
         items: 1,
-        dots: false,
+        dots: true,
         navText: ['<i class="arrow_left"></i>', '<i class="arrow_right"></i>'],
         smartSpeed: 1200,
-        autoHeight: false,
+        autoHeight: true,
         autoplay: false
     });
 
@@ -147,16 +147,17 @@
     /*------------------------
         Property pic slider
     -------------------------*/
-    $(".property-pic-slider").owlCarousel({
+    var property_slider = $(".property-pic-slider");
+    property_slider.owlCarousel({
         loop: true,
-        margin: 0,
-        items: 1,
-        dots: false,
+        margin: 20,
         nav: true,
+        items: 1,
+        dots: true,
         navText: ['<i class="arrow_left"></i>', '<i class="arrow_right"></i>'],
         smartSpeed: 1200,
-        autoHeight: false,
-        autoplay: true
+        autoHeight: true,
+        autoplay: false
     });
 
     /*------------------------

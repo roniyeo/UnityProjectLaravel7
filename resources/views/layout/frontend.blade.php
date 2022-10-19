@@ -180,10 +180,8 @@
                         <h5>Help</h5>
                         <ul>
                             <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Contact Support</a></li>
                             <li><a href="#">Knowledgebase</a></li>
                             <li><a href="#">Careers</a></li>
-                            <li><a href="#">FAQs</a></li>
                         </ul>
                     </div>
                 </div>
@@ -191,9 +189,8 @@
                     <div class="fs-widget">
                         <h5>Links</h5>
                         <ul>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Create Property</a></li>
-                            <li><a href="#">My Properties</a></li>
+                            <li><a href="{{ route('contact') }}">Contact</a></li>
+                            <li><a href="{{ route('properties') }}">My Properties</a></li>
                         </ul>
                     </div>
                 </div>

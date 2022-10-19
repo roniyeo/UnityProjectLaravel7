@@ -38,7 +38,7 @@
                         <div class="pi-text">
                             <div class="pt-price">IDR.
                                 {{ number_format($property->price) }}<span>/{{ $property->tipe_price ? $property->tipe_harga : '' }}</span></div>
-                            <h5><a href="#">{{ $property->title }}</a></h5>
+                            <h5><a href="{{ route('properties.show', $property->kode) }}">{{ $property->title }}</a></h5>
                             <p><span class="icon_pin_alt"></span> {{ $property->address }}</p>
                             <ul>
                                 <li><i class="fa fa-object-group"></i> {{ $property->floor }}</li>

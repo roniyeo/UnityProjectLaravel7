@@ -23,7 +23,7 @@ class PropertyController extends Controller
 {
     public function index()
     {
-        $property = Property::latest()->get();
+        $property = Property::where('status', '1')->get();
         return view('admin.property.index', ['properties' => $property]);
     }
 
@@ -134,6 +134,7 @@ class PropertyController extends Controller
                     $property->brosur = $ebrosur;
                 }
                 $property->agent = Auth::user()->kode_unity;
+                $property->status = 1;
                 $property->save();
 
                 $property->aminities()->attach($request->aminities);
@@ -184,6 +185,7 @@ class PropertyController extends Controller
                     $property->cover_image = $imageName;
                 }
                 $property->agent = Auth::user()->kode_unity;
+                $property->status = 1;
                 $property->save();
 
                 $property->aminities()->attach($request->aminities);
@@ -238,6 +240,7 @@ class PropertyController extends Controller
                 $property->cover_image = $imageName;
             }
             $property->agent = Auth::user()->kode_unity;
+            $property->status = 1;
             $property->save();
 
             $property->aminities()->attach($request->aminities);
