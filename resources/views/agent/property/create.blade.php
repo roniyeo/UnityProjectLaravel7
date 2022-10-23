@@ -254,6 +254,7 @@
                                             <option value="apartment">Apartment</option>
                                             <option value="ruko">Ruko</option>
                                             <option value="villa">Villa</option>
+                                            <option value="kavling">Kavling</option>
                                         </select>
                                     </div>
                                 </div>

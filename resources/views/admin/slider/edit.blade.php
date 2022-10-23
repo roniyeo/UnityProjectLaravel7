@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        <form action="{{ route('slider.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('slider.update') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <section class="section">
                 <div class="card">
@@ -37,6 +37,10 @@
                                 <div class="form-group">
                                     <h6>Upload Slider</h6>
                                     <input type="file" name="slider" id="slider" class="form-control">
+                                    <br>
+                                    @foreach ($slider as $slideshow)
+                                        <img src="{{ asset('slider/' . $slideshow->image) }}" width="150" class="img-thumbnail">
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

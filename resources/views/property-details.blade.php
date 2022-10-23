@@ -105,7 +105,7 @@
                                                 <li>
                                                     <span class="type-name">Harga</span>
                                                     <span class="type-value">IDR.
-                                                        {{ number_format($property->price) }}/{{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                                        {{ number_format($property->price) }} {{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Kategori</span>
@@ -193,13 +193,12 @@
                         <div class="pd-widget">
                             <h4>Maps</h4>
                             <div class="map">
-                                <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
-                                    height="350" style="border:0;" allowfullscreen=""></iframe>
+                                {{ $property->maps }}
                             </div>
                             <div class="map-location">
                                 <div class="row">
                                     <div class="col-lg-12">
+                                        <h6 class="font-weight-bold">Nearby</h6>
                                         <div class="ml-item">
                                             <div class="ml-single-item">
                                                 {!! $property->nearby !!}
@@ -301,22 +300,23 @@
                                 <h5>Simulasi KPR</h5>
                             </div>
                             @if ($property->purpose == 'rent')
-                                <form action="#" class="calculator-form">
+                                <div class="calculator-form">
                                     <div class="filter-input">
                                         <p>Harga Jual</p>
                                         <input type="text" id="harga"
-                                            value="{!! number_format($property->price,2,',','.') !!}" readonly>
+                                            value="{!! number_format($property->price,2,',','.') !!}">
                                     </div>
                                     <div class="filter-input">
                                         <p>Uang Muka (DP %)</p>
-                                        <input type="text" id="dp" value="{!! number_format('20',2,',','.') !!}" readonly>
+                                        <input type="text" id="dp" value="{!! number_format('20',2,',','.') !!}">
                                     </div>
                                     <div class="filter-input">
                                         <p>Bunga % <span style="color: gray">*estimasi rata-rata bunga 8</span></p>
                                         <input type="text" id="bunga" value="{!! number_format('8',2,',','.') !!}" readonly>
                                     </div>
+                                    <button class="btn btn-sm btn-success mb-2" id="hitung">Hitung</button>
                                     <div class="filter-input">
-                                        <p>Hasil Tabel KPR</p>
+                                        <h6 class="font-weight-bold">Hasil Tabel KPR</h6>
                                         <p>DP : IDR. <span id="dpr"></span></p>
                                         <p>KPR : IDR. <span id="kpr"></span></p>
                                         <p>BUNGA : <span id="rate"></span></p>
@@ -346,7 +346,7 @@
                                             </tbody>
                                         </table> --}}
                                     </div>
-                                </form>
+                                </div>
                             @else
                                 <h6>COMING SOON</h6>
                             @endif
@@ -358,8 +358,8 @@
     </section>
     <!-- Property Details Section End -->
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.1/jquery.maskMoney.min.js'></script>
     <script>
         function roundToTwo(num) {
             return +(Math.round(num + "e+2") + "e-2");
@@ -406,7 +406,7 @@
         //     return out;
         // }
 
-        $(function($) {
+        $(function() {
             $("#harga").maskMoney({
                 thousands: '.',
                 decimal: ',',
@@ -423,6 +423,32 @@
                 allowZero: false
             });
         });
+
+        $("#hitung").click(function () {
+            var pvz = $("#harga").maskMoney('unmasked')[0];
+            var dpz = $("#dp").maskMoney('unmasked')[0];
+            dpz = ((dpz / 100) * pvz);
+            var kpr = pvz - dpz;
+            var bungaz = $("#bunga").maskMoney('unmasked')[0];
+            console.log(pvz);
+            console.log(dpz);
+            if (cekParam(pvz, dpz, bungaz)) {
+                $("#kpr").empty();
+                $("#dpr").empty();
+                $("#rate").empty();
+                $("#5th").empty();
+                $("#10th").empty();
+                $("#15th").empty();
+
+                $("#kpr").append(formatNum(kpr));
+                $("#rate").append(formatNum(bungaz) + '%');
+                $("#dpr").append(formatNum(dpz));
+
+                $("#5th").append(formatNum(hitungAnu(pvz, dpz, bungaz, 5)));
+                $("#10th").append(formatNum(hitungAnu(pvz, dpz, bungaz, 10)));
+                $("#15th").append(formatNum(hitungAnu(pvz, dpz, bungaz, 15)));
+            }
+        })
 
         function simulasiKPR() {
             var pvz = $("#harga").maskMoney('unmasked')[0];

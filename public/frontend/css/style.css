@@ -2031,7 +2031,7 @@ ol {
 }
 
 .pd-text .pd-widget .map {
-    height: 350px;
+    height: 450px;
 }
 
 .pd-text .pd-widget .map iframe {
@@ -3252,10 +3252,11 @@ li .richText-btn[data-command=toggleCode] {
 }
 
 .about-pic {
-    height: 423px;
+    height: 270px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 
 .about-pic .play-btn {

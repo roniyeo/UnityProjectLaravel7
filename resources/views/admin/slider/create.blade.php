@@ -35,7 +35,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <h6>Upload Slider</h6>
+                                    <h6>Upload Slider (300x200)</h6>
                                     <input type="file" name="slider" id="slider" class="form-control">
                                 </div>
                             </div>

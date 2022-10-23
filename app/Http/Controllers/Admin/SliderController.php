@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SliderController extends Controller
 {
@@ -14,7 +15,8 @@ class SliderController extends Controller
      */
     public function index()
     {
-        return view('admin.slider.index');
+        $slider = DB::table('slideshow')->get();
+        return view('admin.slider.index', ['slider' => $slider]);
     }
 
     /**
@@ -35,7 +37,16 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-
+        $request->validate([
+            'slider' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $image = $request->file('slider');
+        $imageName =  time() . '-' . $image->getClientOriginalName();
+        $image->move(public_path('slider'), $imageName);
+        DB::table('slideshow')->insert([
+            'image' => $imageName,
+        ]);
+        return redirect()->route('slider')->with('success', 'Created Slider');
     }
 
     /**
@@ -57,7 +68,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $slider = DB::table('slideshow')->where('id', $id)->get();
+        return view('admin.slider.edit', ['slider' => $slider]);
     }
 
     /**
@@ -69,7 +81,20 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'slider' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $image = $request->file('slider');
+
+        if ($image) {
+            $imageName =  time() . '-' . $image->getClientOriginalName();
+            $image->move(public_path('slider'), $imageName);
+        }else{
+            unset($input['image']);
+        }
+
+        DB::table('slideshow')->where('id', $id)->update(['image' => $imageName]);
+        return redirect()->route('slider')->with('success', 'Updated Slider');
     }
 
     /**
@@ -80,6 +105,7 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('slideshow')->where('id', $id)->delete();
+        return redirect()->route('slider')->with('success', 'Deleted Slider');
     }
 }

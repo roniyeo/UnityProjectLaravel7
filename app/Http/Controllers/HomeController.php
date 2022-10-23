@@ -16,13 +16,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        // $property = Property::all();
-        // $decodedProperty = json_decode($property);
-        // dd($decodedProperty);
-        $cities = City::pluck('name', 'id');
+        $slider = DB::table('slideshow')->limit(3)->get();
+        $cities = DB::select("SELECT indonesia_cities.id AS id, indonesia_cities.name AS name, properties.city AS city_id FROM indonesia_cities LEFT JOIN properties ON indonesia_cities.id = properties.city WHERE properties.city");
         $agents = Agents::all();
         $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
-        return view('home', ['agents' => $agents, 'properties' => $properties], compact('cities'));
+        return view('home', ['agents' => $agents, 'properties' => $properties, 'slider' => $slider, 'cities' => $cities]);
     }
 
     public function agents()
@@ -84,6 +82,7 @@ class HomeController extends Controller
     {
         $kategori = $request->kategori;
         $title = $request->title;
+        $price = $request->price;
         $kota = $request->kota;
         $tipe_rumah = $request->tipe_rumah;
         $kondisi = $request->kondisi;
@@ -98,8 +97,10 @@ class HomeController extends Controller
             $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id WHERE type LIKE '%$tipe_rumah%'");
         }else if ($kondisi) {
             $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id WHERE kondisi LIKE '%$kondisi%'");
+        }else if ($price) {
+            $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id WHERE $price");
         }else{
-            $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id WHERE title LIKE '%$title%' AND purpose LIKE '%$kategori%' AND city LIKE '%$kota%' AND type LIKE '%$tipe_rumah%' AND kondisi LIKE '%$kondisi%'");
+            $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id WHERE title LIKE '%$title%' AND purpose LIKE '%$kategori%' AND city LIKE '%$kota%' AND type LIKE '%$tipe_rumah%' AND kondisi LIKE '%$kondisi%' AND $price");
         }
 
         // dd($properties);

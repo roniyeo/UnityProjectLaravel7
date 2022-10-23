@@ -37,6 +37,18 @@
             <span>Customer</span>
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>My Customer</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Closing Database</span>
+        </a>
+    </li>
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
         Setting

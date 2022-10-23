@@ -3,13 +3,21 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="container">
-            <div class="hs-slider owl-carousel">
-                <div class="hs-item set-bg" data-setbg="https://via.placeholder.com/300x200">
+            <div class="hs-slider owl-carousel" id="hs-slider">
+                @foreach ($slider as $slideshow)
+                    @if ($slideshow->image)
+                        <div class="hs-item set-bg" data-setbg="{{ asset('slider/' . $slideshow->image) }}"></div>
+                    @else
+                        <div class="hs-item set-bg" data-setbg="https://via.placeholder.com/300x200">
+                        </div>
+                    @endif
+                @endforeach
+                {{-- <div class="hs-item set-bg" data-setbg="https://via.placeholder.com/300x200">
                 </div>
                 <div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero/hero-2.jpg') }}">
                 </div>
                 <div class="hs-item set-bg" data-setbg="{{ asset('frontend/img/hero/hero-3.jpg') }}">
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -26,7 +34,7 @@
                     <div class="col-lg-5">
                         <div class="change-btn">
                             <div class="cb-item">
-                                <label for="cb-sale" class="active">
+                                <label for="cb-sale">
                                     For Sale
                                     <input type="radio" id="cb-sale" name="kategori" value="sale">
                                 </label>
@@ -41,15 +49,26 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-lg-12 mb-3">
+                    <div class="col-lg-6 mb-3">
                         <input type="text" name="title" id="title" class="form-control"
                             placeholder="Search by Title">
+                    </div>
+                    <div class="col-lg-6 mb-3">
+                        <select name="price" id="price" class="form-control">
+                            <option value="">Pilih Harga</option>
+                            {{-- <option value="price >= 0 AND price <= 150000">0 - 150000</option> --}}
+                            <option value="price >= 0 AND price <= 300000000">0 - 300000000</option>
+                            <option value="price >= 300000000 AND price <= 600000000">300000000 - 600000000</option>
+                            <option value="price >= 600000000 AND price <= 900000000">600000000 - 900000000</option>
+                            <option value="price >= 900000000 AND price <= 12000000000">900000000 - 12000000000</option>
+                            <option value="price >= 12000000000">12000000000 - Di Atas</option>
+                        </select>
                     </div>
                     <div class="col-lg-4">
                         <select name="kota" id="kota" class="form-control">
                             <option value="">Pilih Kota</option>
-                            @foreach ($cities as $id => $name)
-                                <option value="{{ $id }}">{{ $name }}</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -88,11 +107,12 @@
                 <div class="col-lg-7">
                     <div class="property-controls">
                         <ul>
-                            <li data-filter="all">All</li>
+                            <li data-filter=".all">All</li>
                             <li data-filter=".house">Rumah</li>
                             <li data-filter=".ruko">Ruko</li>
                             <li data-filter=".apartment">Apartment</li>
                             <li data-filter=".villa">Villa</li>
+                            <li data-filter=".kavling">Kavling</li>
                         </ul>
                     </div>
                 </div>
@@ -141,7 +161,7 @@
     <!-- Property Section End -->
 
     <!-- Chooseus Section Begin -->
-    <section class="chooseus-section spad set-bg" data-setbg="{{ asset('frontend/img/chooseus/chooseus-bg.jpg') }}">
+    {{-- <section class="chooseus-section spad set-bg" data-setbg="{{ asset('frontend/img/chooseus/chooseus-bg.jpg') }}">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -193,7 +213,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Chooseus Section End -->
 
     <!-- Team Section Begin -->
@@ -207,12 +227,13 @@
                 </div>
                 <div class="col-lg-4 col-md-4">
                     <div class="team-btn">
-                        <a href="#"><i class="fa fa-user"></i> All Agent</a>
+                        <a href="{{ route('agency') }}"><i class="fa fa-user"></i> All Agent</a>
                     </div>
                 </div>
             </div>
             <div class="row">
                 @foreach ($agents as $agent)
+                    @if ($agent)
                     <div class="col-md-3">
                         <div class="ts-item">
                             <div class="ts-text">
@@ -224,6 +245,11 @@
                             </div>
                         </div>
                     </div>
+                    @else
+                    <div class="col-md-12">
+                        <h5 class="text-center">No Agent</h5>
+                    </div>
+                    @endif
                 @endforeach
             </div>
         </div>
@@ -236,32 +262,107 @@
             <div class="lc-slider owl-carousel">
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-1.png') }}" alt="">
+                        <img src="{{ asset('partners/pkp.png') }}" alt="">
                     </div>
                 </a>
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-2.png') }}" alt="">
+                        <img src="{{ asset('partners/new/1.png') }}" alt="">
                     </div>
                 </a>
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-3.png') }}" alt="">
+                        <img src="{{ asset('partners/new/2.png') }}" alt="">
                     </div>
                 </a>
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-4.png') }}" alt="">
+                        <img src="{{ asset('partners/abp.png') }}" alt="">
                     </div>
                 </a>
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-5.png') }}" alt="">
+                        <img src="{{ asset('partners/central.png') }}" alt="">
                     </div>
                 </a>
                 <a href="#" class="lc-item">
                     <div class="lc-item-inner">
-                        <img src="{{ asset('frontend/img/logo-carousel/lc-6.png') }}" alt="">
+                        <img src="{{ asset('partners/bci.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/3.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/4.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/jpk.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/5.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/6.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/7.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/bis.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/paragon.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/new/8.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/jiarmah.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/opus.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/oneavenue.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/belian.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/papamama.png') }}" alt="">
+                    </div>
+                </a>
+                <a href="#" class="lc-item">
+                    <div class="lc-item-inner">
+                        <img src="{{ asset('partners/mbg.png') }}" alt="">
                     </div>
                 </a>
             </div>

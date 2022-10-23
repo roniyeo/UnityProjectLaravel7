@@ -21,7 +21,7 @@
     <!-- Agent Section Begin -->
     <section class="agent-section spad">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-6">
                     <div class="agent-search-form">
                         <form action="#">
@@ -30,7 +30,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="as-slider owl-carousel">
                 <div class="row">
                     @foreach ($agents as $agent)
@@ -51,7 +51,7 @@
                                         <li>Email <span>{{ $agent->email }}</span></li>
                                         <li>Phone <span>{{ $agent->nohp }}</span></li>
                                     </ul>
-                                    <a href="#" class="primary-btn">View profile</a>
+                                    <a href="{{ route('agency.show', $agent->kode_unity) }}" class="primary-btn">View profile</a>
                                 </div>
                             </div>
                         </div>

@@ -61,7 +61,7 @@
     /*------------------
         Carousel Slider
     --------------------*/
-    var hero_s = $(".hs-slider");
+    var hero_s = $("#hs-slider");
     hero_s.owlCarousel({
         loop: true,
         margin: 20,

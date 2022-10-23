@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Portal Agent - Unity Property</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('frontend/img/unity.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('frontend/img/unity.png') }}" type="image/png">
     <style>
         html,
         body {

@@ -21,8 +21,13 @@
  <!-- Blog Section Begin -->
  <section class="blog-section spad">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <img src="{{ asset('frontend/img/unity.png') }}" class="img-thumbnail mx-auto d-block" width="300">
+                <h3>COMING SOON</h3>
+                <h3>UNDER CONSTRUCTION</h3>
+            </div>
+            {{-- <div class="col-lg-8">
                 <div class="blog-item-list">
                     <div class="blog-item large-blog">
                         <div class="bi-pic">
@@ -174,7 +179,7 @@
                         </form>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

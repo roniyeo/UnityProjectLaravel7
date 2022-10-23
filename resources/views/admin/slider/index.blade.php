@@ -34,24 +34,26 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Nama Slider</th>
+                                <th>Image Slider</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
+                            @php
                                 $no = 1;
                             @endphp
-                            @foreach ($aminities as $item)
+                            @foreach ($slider as $slideshow)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $item->aminities }}</td>
                                 <td>
-                                    <a href="{{ route('aminities.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="{{ route('aminities.delete', $item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                                    <img src="{{ asset('slider/' . $slideshow->image) }}" class="img-thumbnail" width="150">
+                                </td>
+                                <td>
+                                    <a href="{{ route('slider.edit', $slideshow->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{{ route('slider.delete', $slideshow->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

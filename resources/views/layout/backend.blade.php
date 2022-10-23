@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('backend/css/main/app.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/main/app-dark.css') }}">
-    <link rel="shortcut icon" href="{{ asset('backend/images/logo/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('frontend/img/unity.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('backend/css/shared/iconly.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/pages/fontawesome.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/extensions/datatables.net-bs5/css/dataTables.bootstrap5.min.css') }}">

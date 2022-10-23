@@ -70,6 +70,17 @@ Route::group(['middleware' => 'auth'], function ()
     Route::get('/admin/slider', 'Admin\SliderController@index')->name('slider');
     Route::get('/admin/slider/create', 'Admin\SliderController@create')->name('slider.create');
     Route::post('/admin/slider/store', 'Admin\SliderController@store')->name('slider.store');
+    Route::get('/admin/slider/edit/{id}', 'Admin\SliderController@edit')->name('slider.edit');
+    Route::post('/admin/slider/update', 'Admin\SliderController@update')->name('slider.update');
+    Route::post('/admin/slider/delete', 'Admin\SliderController@delete')->name('slider.delete');
+
+    // Admin - Front End - Partners
+    Route::get('/admin/partners', 'Admin\PartnerController@index')->name('partners');
+    Route::get('/admin/partners/create', 'Admin\PartnerController@create')->name('partners.create');
+    Route::post('/admin/partners/store', 'Admin\PartnerController@store')->name('partners.store');
+    Route::get('/admin/partners/edit/{id}', 'Admin\PartnerController@edit')->name('partners.edit');
+    Route::post('/admin/partners/update', 'Admin\PartnerController@update')->name('partners.update');
+    Route::post('/admin/partners/delete', 'Admin\PartnerController@delete')->name('partners.delete');
 
     // Logout
     Route::get('/admin/logout', 'Admin\LoginController@logout')->name('logout');

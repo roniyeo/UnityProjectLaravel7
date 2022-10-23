@@ -7,8 +7,8 @@
     <title>Login Administrator</title>
     <link rel="stylesheet" href="{{ asset('backend/css/main/app.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/pages/auth.css') }}">
-    <link rel="shortcut icon" href="{{ asset('backend/images/logo/favicon.svg') }}" type="image/x-icon">
-    <link rel="shortcut icon" href="{{ asset('backend/images/logo/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('frontend/img/unity.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('frontend/img/unity.png') }}" type="image/png">
 </head>
 
 <body>
