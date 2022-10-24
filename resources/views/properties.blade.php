@@ -36,8 +36,15 @@
                             <div class="label">{{ $property->purpose == 'sale' ? 'For Sale' : 'For Rent' }}</div>
                         </div>
                         <div class="pi-text">
+                            @if ($property->purpose == 'sale')
                             <div class="pt-price">IDR.
-                                {{ number_format($property->price) }}<span>/{{ $property->tipe_price ? $property->tipe_harga : '' }}</span></div>
+                                {{ number_format($property->price) }}
+                            </div>
+                            @else
+                                <div class="pt-price">IDR.
+                                    {{ number_format($property->price) }}<span> {{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                </div>
+                            @endif
                             <h5><a href="{{ route('properties.show', $property->kode) }}">{{ $property->title }}</a></h5>
                             <p><span class="icon_pin_alt"></span> {{ $property->address }}</p>
                             <ul>

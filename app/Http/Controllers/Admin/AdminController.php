@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Admin\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -12,8 +13,11 @@ class AdminController extends Controller
 {
     public function index()
     {
-
-        return view('admin.dashboard');
+        $property = Property::count();
+        $agent = DB::table('agents')->count();
+        $pending = Property::where('status', 0)->count();
+        $approved = Property::where('status', 1)->count();
+        return view('admin.dashboard', compact('property', 'agent', 'pending', 'approved'));
     }
 
     // Agent
@@ -205,5 +209,5 @@ class AdminController extends Controller
         return redirect()->route('tipeprice')->with('success', 'Type deleted success');
     }
 
-    
+
 }

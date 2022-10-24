@@ -126,9 +126,15 @@
                                 <div class="label">{{ $property->purpose == 'sale' ? 'For Sale' : 'For Rent' }}</div>
                             </div>
                             <div class="pi-text">
-                                <div class="pt-price">IDR.
-                                    {{ number_format($property->price) }}<span>/{{ $property->tipe_price ? $property->tipe_harga : '' }}</span>
-                                </div>
+                                @if ($property->purpose == 'sale')
+                                    <div class="pt-price">IDR.
+                                        {{ number_format($property->price) }}
+                                    </div>
+                                @else
+                                    <div class="pt-price">IDR.
+                                        {{ number_format($property->price) }}<span> {{ $property->tipe_price ? $property->tipe_harga : '' }}</span>
+                                    </div>
+                                @endif
                                 <h5><a href="{{ route('properties.show', $property->kode) }}">{{ $property->title }}</a></h5>
                                 <p><span class="icon_pin_alt"></span> {{ $property->address }}</p>
                                 <ul>
@@ -260,7 +266,14 @@
     <div class="logo-carousel">
         <div class="container">
             <div class="lc-slider owl-carousel">
-                <a href="#" class="lc-item">
+                @foreach ($partners as $partner)
+                    <a href="#" class="lc-item">
+                        <div class="lc-item-inner">
+                            <img src="{{ asset('partners/' . $partner->image) }}" alt="{{ $partner->title }}">
+                        </div>
+                    </a>
+                @endforeach
+                {{-- <a href="#" class="lc-item">
                     <div class="lc-item-inner">
                         <img src="{{ asset('partners/pkp.png') }}" alt="">
                     </div>
@@ -364,7 +377,7 @@
                     <div class="lc-item-inner">
                         <img src="{{ asset('partners/mbg.png') }}" alt="">
                     </div>
-                </a>
+                </a> --}}
             </div>
         </div>
     </div>

@@ -83,22 +83,23 @@ class PartnerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'nama' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $image = $request->file('logo');
+        $slugName = Str::slug($request->nama);
 
         if ($image) {
-            $imageName =  time() . '-' . $image->getClientOriginalName();
+            $imageName =  time() . '-' . $slugName . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('partners'), $imageName);
         }else{
             unset($input['image']);
         }
 
-        DB::table('partners')->where('id', $id)->update(['title' => $request->nama,'image' => $imageName]);
+        DB::table('partners')->where('id', $request->id)->update(['title' => $request->nama,'image' => $imageName]);
         return redirect()->route('partners')->with('success', 'Updated Partners');
     }
 

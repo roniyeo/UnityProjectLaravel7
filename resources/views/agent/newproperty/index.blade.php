@@ -64,11 +64,12 @@
                 </div>
                 <div class="row">
                     @if ($property)
+                    @foreach ($property as $new)
                     <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                         <div class="card shadow mb-4">
                             <div
                                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                <h6 class="m-0 font-weight-bold text-primary">Setting</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">{{ $new->title }}</h6>
                                 <div class="dropdown no-arrow">
                                     <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -76,22 +77,26 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                         aria-labelledby="dropdownMenuLink">
-                                        <div class="dropdown-header">Dropdown Header:</div>
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                        <div class="dropdown-header">Download :</div>
+                                        <a class="dropdown-item" href="{{ Storage::url('property/pricelist/' . $new->price_list) }}" download>Price List</a>
+                                        <a class="dropdown-item" href="{{ Storage::url('property/siteplan/' . $new->site_plan) }}" download>Site Plan</a>
+                                        <a class="dropdown-item" href="{{ Storage::url('property/brosur/' . $new->brosur) }}" download>E Brosur</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body text-center">
-                                <img src="https://via.placeholder.com/150" class="rounded mx-auto d-block img-thumbnail" alt="...">
-                                Dropdown menus can be placed in the card header in order to extend the functionality
-                                of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis
-                                icon in the card header can be clicked on in order to toggle a dropdown menu.
+                                @if (Storage::disk('public')->exists('property/'.$new->cover_image) && $new->cover_image)
+                                    <img src="{{ Storage::url('property/'.$new->cover_image) }}" class="rounded mx-auto d-block img-thumbnail" width="100">
+                                @endif
+                                <br>
+                                {!! $new->description !!}
+                                <span><i class="fa-solid fa-house"></i> {{ $new->floor }}</span> |
+                                <span><i class="fa-solid fa-bed"></i> {{ $new->bedroom }}</span> |
+                                <span><i class="fa-solid fa-bath"></i> {{ $new->bathroom }}</span>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     @else
                     <div class="card mb-4 py-3 border-bottom-secondary w-100 text-center">
                         <div class="card-body">

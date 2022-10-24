@@ -2,46 +2,24 @@
 @section('content')
     <!-- Property Details Section Begin -->
     <section class="property-details-section">
-        <div class="property-pic-slider owl-carousel">
+        <div class="property-pic-slider owl-carousel" id="property-pic-slider">
+            @foreach ($property->gallery as $gallery)
             <div class="ps-item">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
                                 <div class="col-lg-12 p-0">
-                                    {{-- <div class="ps-item-inner large-item set-bg"
-                                        @if (Storage::disk('public')->exists('property/' . $property->cover_image) && $property->cover_image) data-setbg="{{ Storage::url('property/' . $property->cover_image) }}" @else data-setbg="{{ asset('frontend/img/property/slider/ps-1.jpg') }}" @endif">
-                                    </div> --}}
-                                    @foreach ($property->gallery as $gallery)
-                                    <div class="ps-item-inner large-item set-bg" data-setbg="{{ Storage::url('property/gallery/' . $gallery->name) }}">
-                                    </div>
-                                    @endforeach
+                                    <div class="ps-item-inner large-item set-bg" data-setbg="{{ Storage::url('property/gallery/' . $gallery->name) }}"></div>
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="col-lg-6">
-                            <div class="row">
-                                @if (!$property->gallery->isEmpty())
-                                    <div class="col-sm-6 p-0">
-                                        @foreach ($property->gallery as $gallery)
-                                            <div class="ps-item-inner set-bg"
-                                                data-setbg="{{ Storage::url('property/gallery/' . $gallery->name) }}"></div>
-                                        @endforeach
-                                    </div>
-                                @else
-                                    <div class="col-sm-6 p-0">
-                                        @if (Storage::disk('public')->exists('property/' . $property->cover_image) && $property->cover_image)
-                                            <div class="ps-item-inner set-bg"
-                                                @if (Storage::disk('public')->exists('property/' . $property->cover_image) && $property->cover_image) data-setbg="{{ Storage::url('property/' . $property->cover_image) }}" @else data-setbg="{{ asset('frontend/img/property/slider/ps-1.jpg') }}" @endif">
-                                            </div>
-                                        @endif
-                                    </div>
-                                @endif
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
+            @endforeach
+            {{-- <div class="hs-item set-bg" data-setbg="{{ Storage::url('property/gallery/' . $gallery->name) }}">
+            </div> --}}
         </div>
         <div class="container">
             <div class="row">
@@ -51,9 +29,16 @@
                             <div class="col-lg-6">
                                 <div class="pd-title">
                                     <div class="label">{{ $property->purpose == 'sale' ? 'For Sale' : 'For Rent' }}</div>
+                                    @if ($property->purpose == 'sale')
                                     <div class="pt-price">IDR.
-                                        {{ number_format($property->price) }}<span>/{{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                        {{ number_format($property->price) }}
                                     </div>
+                                    @else
+                                        <div class="pt-price">IDR.
+                                            {{ number_format($property->price) }}<span> {{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                        </div>
+                                    @endif
+
                                     <h3>{{ $property->title }}</h3>
                                     <p><span class="icon_pin_alt"></span> {{ $property->address }}</p>
                                 </div>
@@ -104,13 +89,16 @@
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Harga</span>
-                                                    <span class="type-value">IDR.
-                                                        {{ number_format($property->price) }} {{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                                    @if ($property->purpose == 'sale')
+                                                        <span class="type-value">IDR. {{ number_format($property->price) }}</span>
+                                                    @else
+                                                        <span class="type-value">IDR. {{ number_format($property->price) }} {{ $property->tipe_price == $tipe->id ? $tipe->tipe_price : '' }}</span>
+                                                    @endif
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Kategori</span>
                                                     <span
-                                                        class="type-value">{{ $property->purpose ? 'Rent' : 'Sale' }}</span>
+                                                        class="type-value">{{ $property->purpose == 'rent' ? 'Rent' : 'Sale' }}</span>
                                                 </li>
                                                 <li>
                                                     <span class="type-name">Agent</span>
@@ -193,7 +181,7 @@
                         <div class="pd-widget">
                             <h4>Maps</h4>
                             <div class="map">
-                                {{ $property->maps }}
+                                {!! $property->maps !!}
                             </div>
                             <div class="map-location">
                                 <div class="row">
@@ -299,7 +287,7 @@
                             <div class="section-title sidebar-title">
                                 <h5>Simulasi KPR</h5>
                             </div>
-                            @if ($property->purpose == 'rent')
+                            @if ($property->purpose == 'sale')
                                 <div class="calculator-form">
                                     <div class="filter-input">
                                         <p>Harga Jual</p>

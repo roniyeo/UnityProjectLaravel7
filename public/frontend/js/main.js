@@ -147,16 +147,16 @@
     /*------------------------
         Property pic slider
     -------------------------*/
-    var property_slider = $(".property-pic-slider");
+    var property_slider = $("#property-pic-slider");
     property_slider.owlCarousel({
         loop: true,
-        margin: 20,
-        nav: true,
+        margin: 0,
         items: 1,
         dots: true,
+        nav: true,
         navText: ['<i class="arrow_left"></i>', '<i class="arrow_right"></i>'],
         smartSpeed: 1200,
-        autoHeight: true,
+        autoHeight: false,
         autoplay: false
     });
 

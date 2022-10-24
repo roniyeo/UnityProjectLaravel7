@@ -164,7 +164,7 @@
                     <div class="fs-about">
                         <div class="fs-logo">
                             <a href="#">
-                                <img src="{{ asset('frontend/img/unity.jpg') }}" alt="" width="100">
+                                <img src="{{ asset('frontend/img/logo_unity_white.png') }}" alt="" width="100">
                             </a>
                         </div>
                         <p>Real Estate Agency Company PT Unity Propertindo Sejahtera 📌 Batam Terima jasa titip jual,

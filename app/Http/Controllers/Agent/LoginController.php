@@ -31,17 +31,17 @@ class LoginController extends Controller
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }else{
-            $agents = UserAgent::where('username', $request->username)->first();
+            $agents = UserAgent::where([['username', $request->username], ['status', 1]])->first();
             if ($agents) {
                 if (Hash::check($request->password, $agents->password)) {
                     $request->session()->put('kode_unity', $agents->kode_unity);
                     session(['agent_login' => true]);
                     return redirect()->route('portal');
                 }else{
-                    return back()->with('fail', 'Password not match');
+                    return back()->with('error', 'Password not match');
                 }
             }else{
-                return back()->with('fail', 'Anda belum active sebagai agent');
+                return back()->with('error', 'Anda belum active sebagai agent');
             }
         }
     }

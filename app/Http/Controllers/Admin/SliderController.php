@@ -41,7 +41,7 @@ class SliderController extends Controller
             'slider' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
         $image = $request->file('slider');
-        $imageName =  time() . '-' . $image->getClientOriginalName();
+        $imageName =  time() . '-' . $image->getClientOriginalExtension();
         $image->move(public_path('slider'), $imageName);
         DB::table('slideshow')->insert([
             'image' => $imageName,
@@ -79,7 +79,7 @@ class SliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $request->validate([
             'slider' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -87,13 +87,13 @@ class SliderController extends Controller
         $image = $request->file('slider');
 
         if ($image) {
-            $imageName =  time() . '-' . $image->getClientOriginalName();
+            $imageName =  time() . '-' . $image->getClientOriginalExtension();
             $image->move(public_path('slider'), $imageName);
         }else{
             unset($input['image']);
         }
 
-        DB::table('slideshow')->where('id', $id)->update(['image' => $imageName]);
+        DB::table('slideshow')->where('id', $request->id)->update(['image' => $imageName]);
         return redirect()->route('slider')->with('success', 'Updated Slider');
     }
 

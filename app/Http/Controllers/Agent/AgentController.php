@@ -18,7 +18,10 @@ class AgentController extends Controller
         if ($request->session()->has('kode_unity')) {
             $data = UserAgent::where('kode_unity', $request->session()->get('kode_unity'))->first();
         }
-        return view('agent.portal', compact('data'));
+        $property = Property::where('agent', $request->session()->get('kode_unity'))->count();
+        $pending = Property::where([['agent', $request->session()->get('kode_unity')],['status', 0]])->count();
+        $approved = Property::where([['agent', $request->session()->get('kode_unity')],['status', 1]])->count();
+        return view('agent.portal', compact('data', 'property', 'pending', 'approved'));
     }
 
     public function listNewProperty(Request $request)
@@ -27,7 +30,7 @@ class AgentController extends Controller
         if ($request->session()->has('kode_unity')) {
             $data = UserAgent::where('kode_unity', $request->session()->get('kode_unity'))->first();
         }
-        $property = Property::where('kondisi', 'new')->first();
+        $property = Property::where('kondisi', 'new')->get();
         return view('agent.newproperty.index', compact('data', 'property'));
     }
 

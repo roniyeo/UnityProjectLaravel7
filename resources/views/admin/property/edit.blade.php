@@ -180,7 +180,7 @@
                                     @foreach($property->gallery as $gallery)
                                     <div class="gallery-image-edit" id="gallery-{{$gallery->id}}">
                                         <button type="button" data-id="{{$gallery->id}}" class="btn btn-danger btn-sm"><i class="material-icons">X</i></button>
-                                        <img class="img-responsive" src="{{Storage::url('property/gallery/'.$gallery->name)}}" alt="{{$gallery->name}}">
+                                        <img class="img-thumbnail" src="{{Storage::url('property/gallery/'.$gallery->name)}}" alt="{{$gallery->name}}" width="150">
                                     </div>
                                     @endforeach
                                 </div>

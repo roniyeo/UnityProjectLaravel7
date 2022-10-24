@@ -147,7 +147,7 @@
                                 <h6>Kota</h6>
                                 <fieldset class="form-group">
                                     <select class="form-select" id="kota" name="kota">
-                                        <option value="">Pilih Kota</option>
+                                        {{-- <option value="">Pilih Kota</option> --}}
                                     </select>
                                 </fieldset>
                             </div>
@@ -155,7 +155,7 @@
                                 <h6>Daerah</h6>
                                 <fieldset class="form-group">
                                     <select class="form-select" id="daerah" name="daerah">
-                                        <option value="">Pilih Daerah</option>
+                                        {{-- <option value="">Pilih Daerah</option> --}}
                                     </select>
                                 </fieldset>
                             </div>
@@ -254,13 +254,13 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <h6>Kode</h6>
-                                    <input type="text" class="form-control disabled" id="kode_property" value="{{ 'UNITY-' . $kdpro }}" name="kode" readonly>
+                                    <input type="text" class="form-control disabled" id="kode_property" value="{{ 'UNITY-' . $kdpro }}" name="kode_rent" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <h6>Pilih Kategori</h6>
                                 <fieldset class="form-group">
-                                    <select class="form-select" id="tipe_property" name="tipe">
+                                    <select class="form-select" id="tipe_property" name="tipe_rent">
                                         <option value="">Pilih Tipe Property</option>
                                         <option value="house">House</option>
                                         <option value="apartment">Apartment</option>
@@ -274,7 +274,7 @@
                                     <h6>Title</h6>
                                     <input type="text" class="form-control" id="title"
                                         placeholder="Title" value="{{ old('title') }}"
-                                        name="title">
+                                        name="title_rent">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -282,7 +282,7 @@
                                     <h6>Price</h6>
                                     <input type="text" class="form-control" id="price"
                                         placeholder="Price" value="{{ old('price') }}"
-                                        name="price">
+                                        name="price_rent">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -305,21 +305,21 @@
                                     <h6>Lantai</h6>
                                     <input type="text" class="form-control" id="jumlah_lantai"
                                         placeholder="Jumlah Lantai" value="{{ old('floor') }}"
-                                        name="floor">
+                                        name="floor_rent">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <h6>Kamar Tidur</h6>
                                     <input type="text" class="form-control" id="kamar_tidur"
-                                        placeholder="Kamar Tidur" value="{{ old('bedroom') }}" name="bedroom">
+                                        placeholder="Kamar Tidur" value="{{ old('bedroom') }}" name="bedroom_rent">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <h6>Kamar Mandi</h6>
                                     <input type="text" class="form-control" id="kamar_mandi"
-                                        placeholder="Kamar Mandi" value="{{ old('bathroom') }}" name="bathroom">
+                                        placeholder="Kamar Mandi" value="{{ old('bathroom') }}" name="bathroom_rent">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -327,20 +327,20 @@
                                     <h6>Luas Bangunan</h6>
                                     <input type="text" class="form-control" id="luas_bangunan"
                                         placeholder="Luas Bangunan" value="{{ old('luas_bangungan') }}"
-                                        name="luas_bangunan">
+                                        name="luas_bangunan_rent">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <h6>Luas Tanah</h6>
                                     <input type="text" class="form-control" id="luas_tanah" placeholder="Luas Tanah"
-                                        value="{{ old('luas_tanah') }}" name="luas_tanah">
+                                        value="{{ old('luas_tanah') }}" name="luas_tanah_rent">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <h6>Provinsi</h6>
                                 <fieldset class="form-group">
-                                    <select class="form-select" id="provinsi-rent" name="provinsi">
+                                    <select class="form-select" id="provinsi-rent" name="provinsi_rent">
                                         <option value="">Pilih Provinsi</option>
                                         @foreach ($provinces as $id => $name)
                                             <option value="{{ $id }}">{{ $name }}</option>
@@ -351,7 +351,7 @@
                             <div class="col-lg-4">
                                 <h6>Kota</h6>
                                 <fieldset class="form-group">
-                                    <select class="form-select" id="kota-rent" name="kota">
+                                    <select class="form-select" id="kota-rent" name="kota_rent">
                                         <option value="">Pilih Kota</option>
                                     </select>
                                 </fieldset>
@@ -359,28 +359,28 @@
                             <div class="col-lg-4">
                                 <h6>Daerah</h6>
                                 <fieldset class="form-group">
-                                    <select class="form-select" id="daerah-rent" name="daerah">
+                                    <select class="form-select" id="daerah-rent" name="daerah_rent">
                                         <option value="">Pilih Daerah</option>
                                     </select>
                                 </fieldset>
                             </div>
                             <div class="col-lg-6">
                                 <h6>Alamat</h6>
-                                <textarea class="form-control" id="alamat" rows="3" name="alamat"
+                                <textarea class="form-control" id="alamat" rows="3" name="alamat_rent"
                                     placeholder="Alamat">{{ old('alamat') }}</textarea>
                             </div>
                             <div class="col-lg-6">
                                 <h6>Maps</h6>
-                                <textarea class="form-control" id="maps" rows="3" name="maps"
+                                <textarea class="form-control" id="maps" rows="3" name="maps_rent"
                                     placeholder="Paste a link google maps">{{ old('maps') }}</textarea>
                             </div>
                             <div class="col-lg-12">
                                 <h6>Deskripsi</h6>
-                                <textarea name="deskripsi" id="tinymce-rent" cols="30" rows="10" class="form-control">{{ old('deskripsi') }}</textarea>
+                                <textarea name="deskripsi_rent" id="tinymce-rent" cols="30" rows="10" class="form-control">{{ old('deskripsi') }}</textarea>
                             </div>
                             <div class="col-lg-12">
                                 <h6>Nearby</h6>
-                                <textarea name="nearby" id="tinymce-rent-nearby" cols="30" rows="10" class="form-control">{{ old('nearby') }}</textarea>
+                                <textarea name="nearby_rent" id="tinymce-rent-nearby" cols="30" rows="10" class="form-control">{{ old('nearby') }}</textarea>
                             </div>
                             <div class="col-lg-12">
                                 <h6>Aminities</h6>
@@ -390,7 +390,7 @@
                                             <div class="form-check">
                                                 <div class="checkbox">
                                                     <input type="checkbox" id="aminities-{{ $aminities->id }}"
-                                                        class="form-check-input" name="aminities[]"
+                                                        class="form-check-input" name="aminities_rent[]"
                                                         value="{{ $aminities->id }}">
                                                     <label
                                                         for="aminities-{{ $aminities->id }}">{{ $aminities->aminities }}</label>
@@ -408,13 +408,13 @@
                                 <div class="mb-3">
                                     <h6>Cover</h6>
                                     <input class="form-control" type="file" id="cover_image"
-                                        name="cover_image">
+                                        name="cover_image_rent">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="mb-3">
                                     <h6>Foto</h6>
-                                    <input id="input-id" type="file" name="foto_property[]" class="file"
+                                    <input id="input-id" type="file" name="foto_property_rent[]" class="file"
                                         multiple>
                                 </div>
                             </div>
@@ -426,9 +426,10 @@
             <a href="{{ route('property') }}" class="btn btn-sm btn-info">Back</a>
         </form>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(function() {
             $("#kategori").on('change', function() {
                 $(".data-properties").hide();
                 $("#" + $(this).val()).fadeIn(700);
@@ -442,12 +443,20 @@
 
             $('#provinsi').change(function () {
                 var provinsiID = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                console.log(provinsiID);
                 if (provinsiID) {
                     $.ajax({
-                        type: 'GET',
-                        url: '/getKota?id='+provinsiID,
+                        type: "GET",
+                        url: "/getkota?id="+provinsiID,
+                        data: {_token: $('meta[name="csrf-token"]').attr('content')},
                         dataType: 'JSON',
                         success: function (response) {
+                            console.log(response);
                             if (response) {
                                 $("#kota").empty();
                                 $("#daerah").empty();
@@ -470,10 +479,16 @@
 
             $('#kota').change(function () {
                 var kotaID = $(this).val();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
                 if (kotaID) {
                     $.ajax({
                         type:"GET",
-                        url: "/getDaerah?city_id="+kotaID,
+                        url: "/getdaerah?city_id="+kotaID,
+                        data: {_token: $('meta[name="csrf-token"]').attr('content')},
                         dataType: 'JSON',
                         success:function(response){
                             if(response){
@@ -492,12 +507,13 @@
                 }
             });
 
+
             $('#provinsi-rent').change(function () {
                 var provinsiID = $(this).val();
                 if (provinsiID) {
                     $.ajax({
                         type: 'GET',
-                        url: '/getKota?id='+provinsiID,
+                        url: '/getkota?id='+provinsiID,
                         dataType: 'JSON',
                         success: function (response) {
                             if (response) {
@@ -525,7 +541,7 @@
                 if (kotaID) {
                     $.ajax({
                         type:"GET",
-                        url: "/getDaerah?city_id="+kotaID,
+                        url: "/getdaerah?city_id="+kotaID,
                         dataType: 'JSON',
                         success:function(response){
                             if(response){

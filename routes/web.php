@@ -62,8 +62,8 @@ Route::group(['middleware' => 'auth'], function ()
     Route::post('/admin/property/destroy', 'Admin\PropertyController@destroy')->name('property.destroy');
     Route::get('/admin/property/approved', 'Admin\ApprovedController@index')->name('property.approved');
     Route::get('/admin/property/approved/update/{kode}', 'Admin\ApprovedController@update')->name('property.approved.update');
-    Route::get('/getKota', 'Admin\PropertyController@getKota');
-    Route::get('/getDaerah', 'Admin\PropertyController@getDaerah');
+    Route::get('/getkota', 'Admin\PropertyController@getKota');
+    Route::get('/getdaerah', 'Admin\PropertyController@getDaerah');
     Route::post('/property/gallery/delete','Admin\PropertyController@galleryImageDelete')->name('property.gallery-delete');
 
     // Admin - Front End - Slider

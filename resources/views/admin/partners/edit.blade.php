@@ -34,6 +34,7 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ($partners as $partner)
+                            <input type="hidden" name="id" value="{{ $partner->id }}">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <h6>Nama Partners</h6>

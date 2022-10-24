@@ -26,6 +26,7 @@
 
         <form action="{{ route('slider.update') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+
             <section class="section">
                 <div class="card">
                     <div class="card-header">
@@ -39,6 +40,7 @@
                                     <input type="file" name="slider" id="slider" class="form-control">
                                     <br>
                                     @foreach ($slider as $slideshow)
+                                        <input type="hidden" name="id" value="{{ $slideshow->id }}">
                                         <img src="{{ asset('slider/' . $slideshow->image) }}" width="150" class="img-thumbnail">
                                     @endforeach
                                 </div>

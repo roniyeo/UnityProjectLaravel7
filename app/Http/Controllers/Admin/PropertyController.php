@@ -58,7 +58,9 @@ class PropertyController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $slug = Str::slug($request->title);
+        $slug_rent = Str::slug($request->title_rent);
         $property = new Property();
         if ($request->kategori == 'sale') {
             if ($request->kondisi == 'new') {
@@ -75,7 +77,7 @@ class PropertyController extends Controller
                 $property->luas_bangunan = $request->luas_bangunan;
                 $property->luas_tanah = $request->luas_tanah;
                 $property->provinsi = $request->provinsi;
-                $property->kota = $request->kota;
+                $property->city = $request->kota;
                 $property->daerah = $request->daerah;
                 $property->address = $request->alamat;
                 $property->maps = $request->maps;
@@ -209,28 +211,28 @@ class PropertyController extends Controller
                 return redirect()->route('property')->with('error', 'Pilih kondisi dulu');
             }
         }else if ($request->kategori == 'rent') {
-            $property->kode = $request->kode;
-            $property->title = $request->title;
-            $property->title_slug = $slug;
-            $property->price = $request->price;
+            $property->kode = $request->kode_rent;
+            $property->title = $request->title_rent;
+            $property->title_slug = $slug_rent;
+            $property->price = $request->price_rent;
             $property->tipe_price = $request->tipe_price;
             $property->purpose = $request->kategori;
             $property->kondisi = $request->kondisi;
-            $property->type = $request->tipe;
-            $property->floor = $request->floor;
-            $property->bedroom = $request->bedroom;
-            $property->bathroom = $request->bathroom;
-            $property->luas_bangunan = $request->luas_bangunan;
-            $property->luas_tanah = $request->luas_tanah;
-            $property->provinsi = $request->provinsi;
-            $property->city = $request->kota;
-            $property->daerah = $request->daerah;
-            $property->address = $request->alamat;
-            $property->maps = $request->maps;
-            $property->description = $request->deskripsi;
-            $property->nearby = $request->nearby;
-            $image = $request->file('cover_image');
-            if ($request->file('cover_image')) {
+            $property->type = $request->tipe_rent;
+            $property->floor = $request->floor_rent;
+            $property->bedroom = $request->bedroom_rent;
+            $property->bathroom = $request->bathroom_rent;
+            $property->luas_bangunan = $request->luas_bangunan_rent;
+            $property->luas_tanah = $request->luas_tanah_rent;
+            $property->provinsi = $request->provinsi_rent;
+            $property->city = $request->kota_rent;
+            $property->daerah = $request->daerah_rent;
+            $property->address = $request->alamat_rent;
+            $property->maps = $request->maps_rent;
+            $property->description = $request->deskripsi_rent;
+            $property->nearby = $request->nearby_rent;
+            $image = $request->file('cover_image_rent');
+            if ($request->file('cover_image_rent')) {
                 $currentDate = Carbon::now()->toDateString();
                 $imageName = $slug.'-'.$currentDate.'-'.uniqid().'.'.$image->getClientOriginalExtension();
                 if(!Storage::disk('public')->exists('property')){
@@ -243,10 +245,10 @@ class PropertyController extends Controller
             $property->status = 1;
             $property->save();
 
-            $property->aminities()->attach($request->aminities);
-            $foto = $request->hasFile('foto_property');
+            $property->aminities()->attach($request->aminities_rent);
+            $foto = $request->hasFile('foto_property_rent');
             if ($foto) {
-                foreach ($request->file('foto_property') as $image) {
+                foreach ($request->file('foto_property_rent') as $image) {
                     $currentDate = Carbon::now()->toDateString();
                     $images['name'] = 'Foto-'. $slug . '-' . $currentDate . '-' . uniqid(). '.' . $image->getClientOriginalExtension();
                     $images['size'] = $image->getSize();

@@ -16,11 +16,12 @@ class HomeController extends Controller
 
     public function index()
     {
-        $slider = DB::table('slideshow')->limit(3)->get();
+        $slider = DB::table('slideshow')->orderByRaw('id DESC')->limit(3)->get();
         $cities = DB::select("SELECT indonesia_cities.id AS id, indonesia_cities.name AS name, properties.city AS city_id FROM indonesia_cities LEFT JOIN properties ON indonesia_cities.id = properties.city WHERE properties.city");
         $agents = Agents::all();
         $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
-        return view('home', ['agents' => $agents, 'properties' => $properties, 'slider' => $slider, 'cities' => $cities]);
+        $partners = DB::table('partners')->get();
+        return view('home', ['agents' => $agents, 'properties' => $properties, 'slider' => $slider, 'cities' => $cities, 'partners' => $partners]);
     }
 
     public function agents()
@@ -45,7 +46,8 @@ class HomeController extends Controller
 
     public function about()
     {
-        return view('about');
+        $partners = DB::table('partners')->get();
+        return view('about', ['partners' => $partners]);
     }
 
     public function contact()

@@ -63,7 +63,12 @@
                         <h3>Our Partners</h3>
                     </div>
                     <div class="row">
+                        @foreach ($partners as $partner)
                         <div class="col-lg-2">
+                            <img src="{{ asset('partners/' . $partner->image) }}" alt="{{ $partner->title }}">
+                        </div>
+                        @endforeach
+                        {{-- <div class="col-lg-2">
                             <img src="{{ asset('partners/pkp.png') }}" alt="">
                         </div>
                         <div class="col-lg-2">
@@ -125,7 +130,7 @@
                         </div>
                         <div class="col-lg-2">
                             <img src="{{ asset('partners/mbg.png') }}" alt="">
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
