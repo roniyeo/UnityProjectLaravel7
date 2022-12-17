@@ -16,6 +16,34 @@
         Menus
     </div>
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#property"
+            aria-expanded="true" aria-controls="collapseTwo">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Property</span>
+        </a>
+        <div id="property" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Menu Property :</h6>
+                <a class="collapse-item" href="{{ route('agent.property') }}">My Properties</a>
+                <a class="collapse-item" href="{{ route('agent.newproperty') }}">List New Properties</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#custompage"
+            aria-expanded="true" aria-controls="custompage">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Custom Page</span>
+        </a>
+        <div id="custompage" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Custom Page:</h6>
+                <a class="collapse-item" href="#">Public Profile</a>
+                <a class="collapse-item" href="#">Preview Page</a>
+            </div>
+        </div>
+    </li>
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('agent.property') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Create Properties</span>
@@ -26,12 +54,28 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>List New Properties</span>
         </a>
-    </li>
-    <hr class="sidebar-divider">
+    </li> --}}
+    {{-- <hr class="sidebar-divider">
     <div class="sidebar-heading">
         Penjualan
-    </div>
+    </div> --}}
     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer"
+            aria-expanded="true" aria-controls="customer">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Customer</span>
+        </a>
+        <div id="customer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Customer :</h6>
+                <a class="collapse-item" href="{{ route('agent.customer') }}">Customer</a>
+                <a class="collapse-item" href="#">My Customer</a>
+                <a class="collapse-item" href="#">Closing Database</a>
+            </div>
+        </div>
+    </li>
+
+    {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('agent.customer') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Customer</span>
@@ -48,7 +92,7 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Closing Database</span>
         </a>
-    </li>
+    </li> --}}
     <hr class="sidebar-divider">
     <div class="sidebar-heading">
         Setting

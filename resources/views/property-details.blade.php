@@ -282,7 +282,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div> --}}  
                         <div class="single-sidebar">
                             <div class="section-title sidebar-title">
                                 <h5>Simulasi KPR</h5>

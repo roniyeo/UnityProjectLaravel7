@@ -19,7 +19,8 @@ class HomeController extends Controller
         $slider = DB::table('slideshow')->orderByRaw('id DESC')->limit(3)->get();
         $cities = DB::select("SELECT indonesia_cities.id AS id, indonesia_cities.name AS name, properties.city AS city_id FROM indonesia_cities LEFT JOIN properties ON indonesia_cities.id = properties.city WHERE properties.city");
         $agents = Agents::all();
-        $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
+        // $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
+        $properties = DB::table('properties')->select('properties.*', 'tipe_price.id', 'tipe_price.tipe_price AS tipe_harga', 'agents.kode_unity AS kode_agent', 'agents.nama_agent', 'agents.nohp', 'agents.foto_agent', 'users.kode_unity AS kode_admin', 'users.name')->leftJoin('agents', 'properties.agent', '=', 'agents.kode_unity')->leftJoin('users', 'properties.agent', '=', 'users.kode_unity')->leftJoin('tipe_price', 'properties.tipe_price', '=', 'tipe_price.id')->paginate(3);
         $partners = DB::table('partners')->get();
         return view('home', ['agents' => $agents, 'properties' => $properties, 'slider' => $slider, 'cities' => $cities, 'partners' => $partners]);
     }
@@ -62,8 +63,11 @@ class HomeController extends Controller
 
     public function property()
     {
-        $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
-        return view('properties', ['properties' => $properties]);
+        // $properties = DB::select("SELECT properties.*, tipe_price.id, tipe_price.tipe_price AS tipe_harga, agents.kode_unity AS kode_agent, agents.nama_agent, agents.nohp, agents.foto_agent, users.kode_unity AS kode_admin, users.name FROM properties LEFT JOIN agents ON properties.agent = agents.kode_unity LEFT JOIN users ON properties.agent = users.kode_unity LEFT JOIN tipe_price ON properties.tipe_price = tipe_price.id");
+        $properties = DB::table('properties')->select('properties.*', 'tipe_price.id', 'tipe_price.tipe_price AS tipe_harga', 'agents.kode_unity AS kode_agent', 'agents.nama_agent', 'agents.nohp', 'agents.foto_agent', 'users.kode_unity AS kode_admin', 'users.name')->leftJoin('agents', 'properties.agent', '=', 'agents.kode_unity')->leftJoin('users', 'properties.agent', '=', 'users.kode_unity')->leftJoin('tipe_price', 'properties.tipe_price', '=', 'tipe_price.id')->paginate(3);
+        $tipe = Tipeprice::first();
+
+        return view('properties', ['properties' => $properties], compact('tipe'));
     }
 
     public function showProperty(Request $request, $kode)

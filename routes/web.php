@@ -23,6 +23,7 @@ Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::get('/blog', 'HomeController@blog')->name('blog');
 Route::get('/search', 'HomeController@searchByFilterProperty')->name('search');
+Route::get('/{slug}', 'PageController@index');
 
 // Admin
 Route::get('/admin/login', 'Admin\LoginController@index');

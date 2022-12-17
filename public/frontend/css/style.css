@@ -892,7 +892,8 @@ ol {
 }
 
 .property-item .pi-pic {
-    height: 240px;
+    height: 380px;
+    width: 380px;
     position: relative;
     margin-bottom: 25px;
 }
@@ -1853,7 +1854,8 @@ ol {
 }
 
 .property-pic-slider .ps-item .ps-item-inner.large-item {
-    height: 645px;
+    height: 1080px;
+    width: 1080px;
 }
 
 .pd-text .pd-title {
